@@ -9,6 +9,7 @@
     "contacts": "Contacts",
     "phone": "+7 (495) 502 10 11",
     "where_to_buy": "Where to Buy",
+    "testimonials": "Testimonials",
     "language": "Language",
     "discount": "Get 3% Discount",
     "recommendedTours": "Recommended Tours",
@@ -283,7 +284,42 @@
    "hotelsTitle": "Hotels",
    "regionDescription": "Region Description",
    "priceUponRequest": "Price upon request",
-   "closeButton": "Close"
+   "closeButton": "Close",
+
+   "reviews": {
+    "title": "Traveller Reviews",
+    "subtitle": "Thank you for choosing {{brand}} and sharing your experience. Once your review is published, you’ll receive a personal discount voucher (PDF) for future trips.",
+    "form": {
+      "title": "Leave a trip review",
+      "nameLabel": "Full name",
+      "emailLabel": "Email",
+      "ratingLabel": "Service rating",
+      "reviewLabel": "Your review",
+      "namePlaceholder": "John Smith",
+      "emailPlaceholder": "name@example.com",
+      "reviewPlaceholder": "Route, hotel, flight, support — what was great, what to improve?",
+      "submit": "Send review",
+      "sending": "Sending…",
+      "minCharsHint": "{{remain}} to minimum (10)",
+      "requiredHint": "Please fill the required fields",
+      "errorGeneric": "Failed to send the review. Try again later."
+    },
+    "voucher": {
+      "readyTitle": "Your discount voucher is ready",
+      "pdf": "PDF",
+      "brand": "{{brand}}",
+      "code": "Code:",
+      "validUntil": "· valid until {{date}}",
+      "copyCode": "Copy code",
+      "download": "Download PDF"
+    },
+    "list": {
+      "latest": "Latest reviews",
+      "auto": "Updates automatically",
+      "empty": "No published reviews yet.",
+      "loadError": "Failed to load reviews."
+    }
+  }
 
 
   }

@@ -18,6 +18,7 @@ import EarlyBooking from '../pages/EarlyBooking'
 import PromotionsPage from '../pages/PromotionsPage'
 import FaqSection from '../pages/FaqSection'
 import ContactPage from '../pages/ContactPage'
+import ReviewsPage from '../pages/ReviewsPage'
 
 const AppRouter = () => {
   return (
@@ -29,7 +30,7 @@ const AppRouter = () => {
           <Route path="/news/:slug" element={<NewsDetails />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/early_booking" element={<PromotionsPage />} />
-
+          <Route path="/testimonials" element={<ReviewsPage />} />
           <Route path="/about-uzbekistan" element={<AboutUzbekistan />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/faq" element={<FaqSection />} />

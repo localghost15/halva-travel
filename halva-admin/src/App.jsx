@@ -27,6 +27,8 @@ import DiscountTours from './pages/DiscountTour';
 import PromotionsAdmin from './pages/PromotionsAdmin';
 import AdminFaqs from './pages/AdminFaqs';
 import ContactRequests from './pages/ContactRequests';
+import AdminReviews from './pages/AdminReviews';
+import AdminVouchers from './pages/AdminVouchers';
 
 const { Header, Content, Sider } = Layout;
 
@@ -82,6 +84,14 @@ const AppLayout = ({ children }) => {
           <Link to="/requests">Контактные заявки</Link>
         </Menu.Item>
 
+        <Menu.Item key="/admin-reviews" icon={<BookOutlined />}>
+  <Link to="/admin-reviews">Отзывы</Link>
+</Menu.Item>
+
+<Menu.Item key="/admin-vouchers" icon={<NotificationOutlined />}>
+  <Link to="/admin-vouchers">Ваучеры</Link>
+</Menu.Item>
+
         <Menu.Item key="/news" icon={<NotificationOutlined />}>
           <Link to="/news">Новости</Link>
         </Menu.Item>
@@ -131,6 +141,8 @@ const AppRoutes = () => {
         <Route path="/requests" element={<PrivateRoute><ContactRequests /></PrivateRoute>} />
         <Route path="/special-tours" element={<PrivateRoute><DiscountTours /></PrivateRoute>} />
         <Route path="/promotions" element={<PrivateRoute><PromotionsAdmin /></PrivateRoute>} />
+        <Route path="/admin-reviews" element={<PrivateRoute><AdminReviews /></PrivateRoute>} />
+        <Route path="/admin-vouchers" element={<PrivateRoute><AdminVouchers /></PrivateRoute>} />
         <Route path="/news" element={<PrivateRoute><CreateNews /></PrivateRoute>} />
         <Route path="/bookings" element={<PrivateRoute><BookingPage /></PrivateRoute>} />
         <Route path="/banners" element={<PrivateRoute><Banners /></PrivateRoute>} />

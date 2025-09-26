@@ -50,7 +50,7 @@ const CarouselHeader = () => {
               />
 
               {/* --- Самолет --- */}
-              <AnimatePresence mode="wait">
+              {/* <AnimatePresence mode="wait">
                 {currentSlide === index && (
                   <motion.img
                     key={`plane-${index}`}
@@ -63,7 +63,7 @@ const CarouselHeader = () => {
                     transition={{ duration: 4, ease: "easeInOut" }}
                   />
                 )}
-              </AnimatePresence>
+              </AnimatePresence> */}
 
               {/* Основной текст */}
               <AnimatePresence mode="wait">
@@ -114,7 +114,7 @@ const CarouselHeader = () => {
               </AnimatePresence>
 
               {/* --- Слой 1: Человек --- */}
-              <AnimatePresence mode="wait">
+              {/* <AnimatePresence mode="wait">
                 {currentSlide === index && (
                   <motion.img
                     key={`person-${index}`}
@@ -129,10 +129,10 @@ const CarouselHeader = () => {
                     className="hidden md:block absolute top-[-5%] right-[-25%] w-12 md:w-36 lg:w-44 object-contain z-20"
                   />
                 )}
-              </AnimatePresence>
+              </AnimatePresence> */}
 
               {/* --- Слой 2: Верблюд --- */}
-              <AnimatePresence mode="wait">
+              {/* <AnimatePresence mode="wait">
                 {currentSlide === index && (
                   <motion.img
                     key={`camel-${index}`}
@@ -146,7 +146,7 @@ const CarouselHeader = () => {
                     className="hidden md:block absolute top-[40%] right-[-40%] w-12 md:w-48 lg:w-56 object-contain z-30"
                   />
                 )}
-              </AnimatePresence>
+              </AnimatePresence> */}
             </div>
           ))}
         </Carousel>

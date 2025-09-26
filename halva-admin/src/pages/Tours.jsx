@@ -1,34 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form, Checkbox,Input, Select, InputNumber ,  Upload, message} from 'antd';
-import {
-    WifiOutlined,
-    CarOutlined,
-    CoffeeOutlined,
-    RestOutlined,
-    FireOutlined,
-    AppstoreAddOutlined,
-    PhoneOutlined,
-    SafetyOutlined,
-    EnvironmentOutlined,
-    SmileOutlined,
-    GiftOutlined,
-    PlusOutlined 
-  } from '@ant-design/icons';
+import { FaBed, FaBus, FaUtensils, FaPlane, FaTrain, FaTicketAlt, FaHiking, FaTheaterMasks } from "react-icons/fa";
+import { MdOutlineGTranslate } from "react-icons/md";
+import {PlusOutlined } from '@ant-design/icons';
+import { LuPartyPopper } from "react-icons/lu";
 import axios from '../api/axiosConfig';
 
+
 const amenitiesList = [
-    { label: 'Wi-Fi', value: 'wifi', icon: <WifiOutlined /> },
-    { label: 'Кондиционер', value: 'ac', icon: <RestOutlined /> },
-    { label: 'Завтрак', value: 'breakfast', icon: <CoffeeOutlined /> },
-    { label: 'Парковка', value: 'parking', icon: <CarOutlined /> },
-    { label: 'Бассейн', value: 'pool', icon: <AppstoreAddOutlined /> },
-    { label: 'Отопление', value: 'heating', icon: <FireOutlined /> },
-    { label: 'Телефон', value: 'phone', icon: <PhoneOutlined /> },
-    { label: 'Сейф', value: 'safe', icon: <SafetyOutlined /> },
-    { label: 'Вид на город', value: 'view', icon: <EnvironmentOutlined /> },
-    { label: 'Детская зона', value: 'kids', icon: <SmileOutlined /> },
-    { label: 'Подарок', value: 'gift', icon: <GiftOutlined /> }
-  ];
+  { label: "Размещение", value: "accommodation", icon: <FaBed className="text-lg" /> },
+  { label: "Транспорт", value: "transport", icon: <FaBus className="text-lg" /> },
+  { label: "Услуги гида", value: "guide", icon: <MdOutlineGTranslate className="text-lg" /> },
+  { label: "Питание", value: "meals", icon: <FaUtensils className="text-lg" /> },
+  { label: "Авиабилеты", value: "flight_tickets", icon: <FaPlane className="text-lg" /> },
+  { label: "Ж/д билеты", value: "train_tickets", icon: <FaTrain className="text-lg" /> },
+  { label: "Входные билеты", value: "entrance_tickets", icon: <FaTicketAlt className="text-lg" /> },
+  { label: "Развлечения", value: "entertainment", icon: <LuPartyPopper className="text-lg" /> },
+  { label: "Культурные мероприятия", value: "cultural", icon: <FaTheaterMasks className="text-lg" /> },
+  { label: "Походы", value: "hiking", icon: <FaHiking className="text-lg" /> },
+];
 
 const Tours = () => {
   const [tours, setTours] = useState([]);

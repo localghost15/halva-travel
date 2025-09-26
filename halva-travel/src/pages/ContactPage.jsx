@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { toast } from 'react-hot-toast';
-import axios from '../api/axiosConfig';
+// src/pages/ContactPage.jsx
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
+import axios from "../api/axiosConfig";
+
+const BRAND_COLOR = "#A88856";
+
+const fade = (delay = 0) => ({
+  initial: { opacity: 0, y: 12 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.45, delay },
+});
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
+  const [formData, setFormData] = useState({ name: "", contactType: "email", contactValue: "", message: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -12,112 +22,143 @@ const ContactPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.name.trim() || !formData.contactValue.trim() || !formData.message.trim()) {
+      toast.error("Заполните все поля");
+      return;
+    }
     try {
-      await axios.post('/contact', formData);
-      toast.success('Спасибо! Мы свяжемся с вами.');
-      setFormData({ name: '', phone: '', message: '' });
-    } catch (err) {
-      toast.error('Ошибка при отправке. Попробуйте позже.');
+      setLoading(true);
+      await axios.post("/contact", formData);
+      toast.success("Спасибо! Мы свяжемся с вами.");
+      setFormData({ name: "", contactType: "phone", contactValue: "", message: "" });
+    } catch {
+      toast.error("Ошибка при отправке. Попробуйте позже.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="relative w-full min-h-screen overflow-hidden">
-      
-      {/* Видео фон */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
-      >
-        <source src="/video.mp4" type="video/mp4" />
-        Ваш браузер не поддерживает видео.
-      </video>
-
-      {/* Затемнение поверх видео */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black/10 z-10" />
-
-      {/* Контент поверх видео */}
-      <div className="relative z-20 w-full max-w-screen-2xl mx-auto py-12 px-6 text-white">
-        
-        {/* Заголовок */}
+    <div className="w-full min-h-screen bg-[#faf8f5]">
+      <div className="max-w-screen-lg mx-auto px-4 py-14">
         <motion.h1
-          initial={{ opacity: 0, y: -40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-12"
+          {...fade(0)}
+          className="text-3xl md:text-4xl font-bold text-center tracking-tight"
+          style={{ color: "#2b2b2b" }}
         >
           Свяжитесь с нами
         </motion.h1>
+        <motion.p {...fade(0.05)} className="text-center text-gray-500 mt-2">
+          Мы ответим как можно скорее.
+        </motion.p>
 
-        {/* Контактная информация */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          className="bg-white/90 backdrop-blur-md rounded-2xl p-8 mb-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-800"
-        >
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Телефоны</h2>
-            <p>+998 90 123 45 67</p>
-            <p>+998 99 765 43 21</p>
+        {/* Контактные данные */}
+        <motion.div {...fade(0.1)} className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-white border border-[#f3f0eb] rounded-2xl p-6">
+            <div className="text-sm text-gray-500 mb-1">Телефоны</div>
+            <a href="tel:+998940072299" className="block font-semibold text-[#2b2b2b] hover:underline">
+              +998 94 007 22 99
+            </a>
+            <a href="tel:+998934567455" className="block font-semibold text-[#2b2b2b] hover:underline">
+              +998 93 456 74 55
+            </a>
           </div>
 
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Email</h2>
-            <p>info@yourtravel.com</p>
-            <p>support@yourtravel.com</p>
+          <div className="bg-white border border-[#f3f0eb] rounded-2xl p-6">
+            <div className="text-sm text-gray-500 mb-1">Email</div>
+            <a href="mailto:info@halvatravel.com" className="font-semibold text-[#2b2b2b] hover:underline">
+              info@halvatravel.com
+            </a>
           </div>
 
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Адрес</h2>
-            <p>г. Ташкент, улица Истикбол, 25</p>
+          <div className="bg-white border border-[#f3f0eb] rounded-2xl p-6">
+            <div className="text-sm text-gray-500 mb-1">Адрес</div>
+            <div className="font-semibold text-[#2b2b2b]">
+              200118, Узбекистан, г. Бухара, ул. Саррофон, д. 10
+            </div>
           </div>
         </motion.div>
 
-        {/* Форма обратной связи */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="bg-white/90 backdrop-blur-md rounded-2xl p-8 max-w-3xl mx-auto text-gray-800"
-        >
-          <h2 className="text-2xl font-bold mb-6 text-center">Отправить запрос</h2>
-          <form onSubmit={handleSubmit} className="space-y-4 flex flex-col gap-3">
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Ваше имя"
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#DFAF68]"
-              required
-            />
-            <input
-              type="email"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Email"
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#DFAF68]"
-              required
-            />
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Ваш вопрос"
-              className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#DFAF68]"
-              rows="4"
-              required
-            />
+        {/* Форма */}
+        <motion.div {...fade(0.15)} className="mt-6 bg-white border border-[#f3f0eb] rounded-2xl p-6 md:p-8">
+          <h2 className="text-xl font-semibold mb-4" style={{ color: BRAND_COLOR }}>
+            Отправить запрос
+          </h2>
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">Ваше имя</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Иван Петров"
+                className="w-full px-3 py-2 rounded-xl border border-[#f3f0eb] bg-white outline-none focus:ring-2 focus:ring-[#A88856]/30"
+                required
+              />
+            </div>
+
+            {/* Выбор способа связи */}
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">Способ связи</label>
+              <select
+                name="contactType"
+                value={formData.contactType}
+                onChange={handleChange}
+                className="w-full px-3 py-2 rounded-xl border border-[#f3f0eb] bg-white outline-none focus:ring-2 focus:ring-[#A88856]/30"
+              >
+                <option value="email">Email</option>
+                <option value="whatsapp">WhatsApp</option>
+              </select>
+            </div>
+
+            {/* Поле ввода в зависимости от выбора */}
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">
+                {formData.contactType === "phone"
+                  ? "Телефон"
+                  : formData.contactType === "email"
+                  ? "Email"
+                  : "WhatsApp"}
+              </label>
+              <input
+                type={formData.contactType === "email" ? "email" : "text"}
+                name="contactValue"
+                value={formData.contactValue}
+                onChange={handleChange}
+                placeholder={
+                  formData.contactType === "phone"
+                    ? "+998 94 000 00 00"
+                    : formData.contactType === "email"
+                    ? "example@mail.com"
+                    : "+998 94 000 00 00"
+                }
+                className="w-full px-3 py-2 rounded-xl border border-[#f3f0eb] bg-white outline-none focus:ring-2 focus:ring-[#A88856]/30"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs text-gray-500 mb-1">Ваш вопрос</label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Кратко опишите ваш запрос"
+                rows={4}
+                className="w-full px-3 py-2 rounded-xl border border-[#f3f0eb] bg-white outline-none focus:ring-2 focus:ring-[#A88856]/30"
+                required
+              />
+            </div>
+
             <button
               type="submit"
-              className="w-full bg-[#DFAF68] hover:bg-[#c59b56] text-white font-medium py-2 rounded-xl transition"
+              disabled={loading}
+              className={`w-full md:w-auto inline-flex items-center justify-center rounded-xl px-5 py-2.5 font-semibold text-white transition ${
+                loading ? "bg-gray-400 cursor-not-allowed" : "bg-[#A88856] hover:bg-[#987447]"}
+              `}
             >
-              Отправить
+              {loading ? "Отправка…" : "Отправить"}
             </button>
           </form>
         </motion.div>

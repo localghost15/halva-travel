@@ -68,8 +68,16 @@ const tourSchema = new mongoose.Schema({
   includes: {
     type: [String],
     enum: [
-      'wifi', 'ac', 'breakfast', 'parking', 'pool',
-      'heating', 'phone', 'safe', 'view', 'kids', 'gift'
+      'accommodation',     // Размещение
+      'transport',         // Транспорт
+      'guide',             // Услуги гида
+      'meals',             // Питание
+      'flight_tickets',    // Авиабилеты
+      'train_tickets',     // Ж/д билеты
+      'entrance_tickets',  // Входные билеты
+      'entertainment',     // Развлечения
+      'cultural',          // Культурные мероприятия
+      'hiking'             // Походы
     ],
     default: []
   },

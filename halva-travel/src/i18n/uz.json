@@ -4,6 +4,7 @@
     "info": "Foydali ma’lumotlar",
     "promotions": "Aksiyalar",
     "news": "Yangiliklar",
+    "testimonials": "Sharhlar",
     "faq": "FAQ",
     "all": "Barcha viloyatlar",
     "contacts": "Aloqa",
@@ -284,7 +285,42 @@
   "hotelsTitle": "Mehmonxonalar",
   "regionDescription": "Hudud haqida ma'lumot",
   "priceUponRequest": "Narx so'rov bo'yicha",
-  "closeButton": "Yopish"
+  "closeButton": "Yopish",
+
+  "reviews": {
+    "title": "Sayohatchilar sharhlari",
+    "subtitle": "{{brand}} ni tanlaganingiz va taassurotlar bilan o‘rtoqlashganingiz uchun rahmat. Sharh chop etilgach, kelgusi safarlaringiz uchun shaxsiy chegirma vaucheri (PDF) olasiz.",
+    "form": {
+      "title": "Safar haqida sharh qoldiring",
+      "nameLabel": "Ism va familiya",
+      "emailLabel": "Elektron pochta",
+      "ratingLabel": "Xizmat bahosi",
+      "reviewLabel": "Sizning sharhingiz",
+      "namePlaceholder": "Ali Karimov",
+      "emailPlaceholder": "name@example.com",
+      "reviewPlaceholder": "Marshrut, mehmonxona, parvoz, hamrohlik — nimalar yoqdi, nimani yaxshilash kerak?",
+      "submit": "Sharhni yuborish",
+      "sending": "Yuborilmoqda…",
+      "minCharsHint": "Minimumga {{remain}} qoldi (10)",
+      "requiredHint": "Majburiy maydonlarni to‘ldiring",
+      "errorGeneric": "Sharh yuborilmadi. Birozdan so‘ng urinib ko‘ring."
+    },
+    "voucher": {
+      "readyTitle": "Chegirma vaucheringiz tayyor",
+      "pdf": "PDF",
+      "brand": "{{brand}}",
+      "code": "Kod:",
+      "validUntil": "· amal qiladi: {{date}}",
+      "copyCode": "Kod nusxalash",
+      "download": "PDF yuklab olish"
+    },
+    "list": {
+      "latest": "So‘nggi sharhlar",
+      "auto": "Avtomatik yangilanadi",
+      "empty": "Hozircha chop etilgan sharh yo‘q.",
+      "loadError": "Sharhlar yuklanmadi."
+    }
+  }
 
   }
   

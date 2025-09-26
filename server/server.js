@@ -11,6 +11,7 @@ connectDB();
 const app = express();
 const allowedOrigins = [
 	'http://localhost:5173',
+	'http://localhost:5174',
 	'http://localhost:3200',
 	'https://halvatravel.com',
 	'https://admin.halvatravel.com'];
@@ -40,6 +41,8 @@ app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/promotions', require('./routes/promotionRoutes'));
 app.use('/api/faqs', require('./routes/faqRoutes'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/reviews', require('./routes/reviews'));
+app.use('/api/vouchers', require('./routes/vouchers'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
