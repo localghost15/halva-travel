@@ -14,6 +14,7 @@ const allowedOrigins = [
 	'http://localhost:5174',
 	'http://localhost:3200',
 	'https://halvatravel.com',
+  'https://backend.halvatravel.com',
 	'https://admin.halvatravel.com'];
 
 app.use(cors({
