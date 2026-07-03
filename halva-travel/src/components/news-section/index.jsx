@@ -42,7 +42,7 @@ const NewsSection = () => {
     <section className="bg-[#fff] py-10 px-4 overflow-hidden">
       <div className="max-w-screen-2xl mx-auto">
         <motion.h2
-          className="text-3xl font-bold mb-4"
+          className="text-2xl md:text-3xl font-bold mb-4"
           initial="hidden"
           whileInView="show"
           variants={fadeIn("up", 0.1)}

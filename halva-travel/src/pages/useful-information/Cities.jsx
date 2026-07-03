@@ -109,13 +109,13 @@ const CitiesStackScroll = () => {
               </div>
 
               {/* Контент */}
-              <div className="z-10 max-w-7xl w-full text-center mt-24 relative px-6">
+              <div className="z-10 max-w-7xl w-full text-center mt-20 md:mt-24 relative px-4 sm:px-6">
                 {/* Навигационные точки */}
-                <div className="flex justify-center gap-2 mb-6">
+                <div className="flex justify-center gap-2 mb-4 md:mb-6">
                   {regions.map((_, i) => (
                     <span
                       key={i}
-                      className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
                         i === index ? "bg-[#DFAF68] scale-125" : "bg-gray-300"
                       }`}
                     />
@@ -123,17 +123,17 @@ const CitiesStackScroll = () => {
                 </div>
 
                 {/* Название города */}
-                <h2 className="text-5xl font-bold text-white mb-2">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
                   {regions[index].name[lang]}
                 </h2>
 
                 {regions[index].images.length > 1 && (
-                <div className=" bottom-10 flex gap-4 justify-center w-full z-20">
+                <div className="bottom-10 flex gap-2 sm:gap-4 justify-start sm:justify-center w-full z-20 overflow-x-auto no-scrollbar pb-1">
                   {regions[index].images.map((img, i) => (
                     <button
                       key={i}
                       onClick={() => setActiveImageIndex(i)}
-                      className={`border-2 rounded-lg overflow-hidden w-20 h-14 ${
+                      className={`border-2 rounded-lg overflow-hidden w-16 h-11 sm:w-20 sm:h-14 flex-shrink-0 ${
                         i === activeImageIndex ? "border-[#DFAF68]" : "border-transparent"
                       } transition`}
                     >
@@ -170,14 +170,14 @@ const CitiesStackScroll = () => {
                 {/* Описание */}
                 <div
                   ref={textContainerRef}
-                  className="max-h-[450px] overflow-y-auto p-4 bg-white backdrop-blur-sm rounded-xl text-gray-700 text-sm mx-auto w-full max-w-3xl"
+                  className="max-h-[38vh] md:max-h-[450px] overflow-y-auto p-4 bg-white backdrop-blur-sm rounded-xl text-gray-700 text-sm mx-auto w-full max-w-3xl"
                 >
                   {regions[index].description[lang]}
                 </div>
               </div>
 
               {/* Мини-кнопки навигации по городам */}
-              <div className="absolute top-1/2 left-6 transform -translate-y-1/2 z-20">
+              <div className="absolute top-1/2 left-2 sm:left-6 transform -translate-y-1/2 z-20">
                 <button
                   onClick={prevCity}
                   disabled={index === 0}
@@ -187,7 +187,7 @@ const CitiesStackScroll = () => {
                 </button>
               </div>
 
-              <div className="absolute top-1/2 right-6 transform -translate-y-1/2 z-20">
+              <div className="absolute top-1/2 right-2 sm:right-6 transform -translate-y-1/2 z-20">
                 <button
                   onClick={nextCity}
                   disabled={index === regions.length - 1}

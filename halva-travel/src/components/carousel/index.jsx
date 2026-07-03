@@ -39,14 +39,14 @@ const TravelCarousel = () => {
           <img
             src="/1370x440_rixos.jpg"
             alt="Khorezm Climate Resort"
-            className="w-full h-[600px] object-cover"
+            className="w-full h-[560px] sm:h-[600px] object-cover"
           />
 
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="absolute max-h-max top-0 left-0 w-full md:w-[550px] h-full bg-white/90 backdrop-blur-sm rounded-xl m-4 p-6 shadow-xl flex flex-col justify-center"
+            className="absolute max-h-max top-0 left-0 w-[calc(100%-2rem)] md:w-[550px] h-[calc(100%-2rem)] bg-white/90 backdrop-blur-sm rounded-xl m-4 p-5 sm:p-6 shadow-xl flex flex-col justify-center"
           >
             <div className="text-left">
               <motion.h2

@@ -59,15 +59,15 @@ const NewsPage = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-3xl mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold text-center mb-10 text-[#2b2b2b]">
+    <div className="max-w-screen-3xl mx-auto px-4 py-10 md:py-16">
+      <h1 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-10 text-[#2b2b2b]">
         {t("newsPageTitle")}
       </h1>
 
       {loading ? (
         <PageLoader isLoading />
       ) : (
-        <div className="grid grid-cols-1 bg-[#A88856]/10 rounded-2xl p-12 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 bg-[#A88856]/10 rounded-2xl p-4 sm:p-8 md:p-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {news.map((item) => (
             <NewsCard key={item._id} item={item} lang={lang} />
           ))}

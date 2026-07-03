@@ -258,7 +258,7 @@ const Layout = () => {
         <Outlet />
 
         <footer className="bg-white relative text-gray-700 pt-10 ">
-          <img src="/camels.svg" className="absolute h-16 bottom-20 w-full" alt="" />
+          <img src="/camels.svg" className="hidden md:block absolute h-16 bottom-20 w-full" alt="" />
       <div className="max-w-screen-2xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 pb-10">
         {/* Колонка 1 */}
         <div>

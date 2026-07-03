@@ -33,7 +33,7 @@ const AboutUzbekistan = () => {
         viewport={{ once: true }}
         variants={fadeIn("up", 0.1)}
       >
-        <motion.h1 className="text-4xl font-bold mb-4">{t('about_uz.title')}</motion.h1>
+        <motion.h1 className="text-3xl md:text-4xl font-bold mb-4">{t('about_uz.title')}</motion.h1>
         <motion.p className="text-gray-600 max-w-2xl mx-auto">{t('about_uz.intro')}</motion.p>
         <motion.img
           src="/Registan Square shutterstock_250136662.jpg"

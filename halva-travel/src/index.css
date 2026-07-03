@@ -121,8 +121,14 @@
 .layout-container-limit {
   box-sizing: border-box;
   width: 100%;
-  padding: 0px 40px;
+  padding: 0px 16px;
   max-width: 1530px !important;
+}
+
+@media (min-width: 768px) {
+  .layout-container-limit {
+    padding: 0px 40px;
+  }
 }
 
 .ceCamv {

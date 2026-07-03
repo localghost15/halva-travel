@@ -350,7 +350,7 @@ const ReviewsPage: React.FC = () => {
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-16">
       <motion.h1
-        className="text-4xl font-bold text-center mb-4 text-[#2b2b2b] tracking-tight"
+        className="text-3xl md:text-4xl font-bold text-center mb-4 text-[#2b2b2b] tracking-tight"
         initial={{ opacity: 0, y: -18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

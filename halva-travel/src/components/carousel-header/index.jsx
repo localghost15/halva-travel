@@ -27,10 +27,10 @@ const CarouselHeader = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-2xl mx-auto p-5">
+    <div className="max-w-screen-2xl mx-auto p-3 sm:p-5">
       {banners.length > 0 && (
         <Carousel
-          className="rounded-3xl overflow-hidden"
+          className="rounded-2xl md:rounded-3xl overflow-hidden"
           autoPlay
           infiniteLoop
           showThumbs={false}
@@ -41,7 +41,7 @@ const CarouselHeader = () => {
           onChange={(index) => setCurrentSlide(index)}
         >
           {banners.map((banner, index) => (
-            <div key={index} className="relative h-[600px] overflow-hidden">
+            <div key={index} className="relative h-[340px] sm:h-[450px] md:h-[600px] overflow-hidden">
               {/* Фон баннера */}
               <img
                 src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${banner.image}`}
@@ -70,7 +70,7 @@ const CarouselHeader = () => {
                 {currentSlide === index && (
                   <motion.div
                     key={`text-${index}`}
-                    className="absolute inset-0 bg-black/20 flex flex-col justify-center items-start px-10 text-white"
+                    className="absolute inset-0 bg-black/20 flex flex-col justify-center items-start px-5 sm:px-8 md:px-10 text-white"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
@@ -86,7 +86,7 @@ const CarouselHeader = () => {
                     </motion.span>
 
                     <motion.h2
-                      className="text-4xl font-bold mb-4"
+                      className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 md:mb-4"
                       initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.4, duration: 0.6 }}
@@ -95,7 +95,7 @@ const CarouselHeader = () => {
                     </motion.h2>
 
                     <motion.p
-                      className="text-lg mb-4"
+                      className="text-sm sm:text-base md:text-lg mb-4 max-w-xl"
                       initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.6, duration: 0.6 }}
@@ -104,7 +104,7 @@ const CarouselHeader = () => {
                     </motion.p>
 
                     <motion.button
-                      className="bg-[#DFAF68] cursor-pointer text-white px-6 py-3 rounded-xl text-sm hover:bg-[#b08c52] transition"
+                      className="bg-[#DFAF68] cursor-pointer text-white px-5 py-2.5 md:px-6 md:py-3 rounded-xl text-sm hover:bg-[#b08c52] transition"
                       transition={{ type: "spring", stiffness: 200 }}
                     >
                       {banner.cta?.[lang] || "Подробнее"}

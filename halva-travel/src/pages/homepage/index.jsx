@@ -223,8 +223,8 @@ const Home = () => {
         <CarouselHeader />
       </div>
 
-      <div className='bg-[#A88856]/10 py-12'>
-        <h2 className='max-w-screen-2xl mx-auto uppercase text-3xl font-bold mb-2'>
+      <div className='bg-[#A88856]/10 py-8 md:py-12'>
+        <h2 className='max-w-screen-2xl mx-auto px-4 uppercase text-2xl md:text-3xl font-bold mb-2'>
           {t('recommendedTours')}
         </h2>
 
@@ -284,7 +284,7 @@ const Home = () => {
       </div>
     </div>
 
-        <h2 className='max-w-screen-2xl mx-auto uppercase text-3xl font-bold mt-8 mb-4'>
+        <h2 className='max-w-screen-2xl mx-auto px-4 uppercase text-2xl md:text-3xl font-bold mt-8 mb-4'>
           {t('travelNow')}
         </h2>
 
@@ -332,7 +332,7 @@ const Home = () => {
 
         <div className='bg-white'>
           <NewsSection />
-          <h2 className="text-3xl max-w-screen-2xl mx-auto font-bold mb-4">
+          <h2 className="text-2xl md:text-3xl max-w-screen-2xl px-4 mx-auto font-bold mb-4">
             {t('trustedBy')}
             <div className="w-40 h-[4px] bg-[#DFAF68] mt-2" />
           </h2>

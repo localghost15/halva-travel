@@ -1,11 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { FiArrowUpRight } from "react-icons/fi";
+import { FaWhatsapp, FaTelegramPlane } from "react-icons/fa";
 
 const MobileMenu = ({ t }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { i18n } = useTranslation();
+
+  // Блокируем прокрутку страницы, пока меню открыто
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   const infoLinks = [
     { label: t("dropdown.about_uzbekistan"), href: "/about-uzbekistan" },
@@ -17,14 +28,14 @@ const MobileMenu = ({ t }) => {
     { label: t("dropdown.cuisine"), href: "/cuisine" },
   ];
 
-  const allLinks = [
+  const primaryLinks = [
     { label: t("aboutTitle"), href: "/about-us" },
     { label: t("tours"), href: "/tours" },
-    ...infoLinks,
     { label: t("promotions"), href: "/early_booking" },
     { label: t("news"), href: "/news" },
     { label: "FAQ", href: "/faq" },
     { label: t("contacts"), href: "/contact" },
+    { label: t("testimonials"), href: "/testimonials" },
   ];
 
   const langLinks = [
@@ -33,98 +44,229 @@ const MobileMenu = ({ t }) => {
     { label: "O'zbekcha", code: "uz", img: "/uz.svg" },
   ];
 
+  const close = () => setMenuOpen(false);
+
+  const panelVariants = {
+    hidden: { clipPath: "inset(0% 0% 100% 0%)" },
+    visible: {
+      clipPath: "inset(0% 0% 0% 0%)",
+      transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] },
+    },
+    exit: {
+      clipPath: "inset(0% 0% 100% 0%)",
+      transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
+    },
+  };
+
+  const listContainer = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.06, delayChildren: 0.15 } },
+    exit: {},
+  };
+
+  const lineReveal = {
+    hidden: { y: "115%" },
+    visible: { y: "0%", transition: { duration: 0.7, ease: [0.33, 1, 0.68, 1] } },
+    exit: { y: "115%", transition: { duration: 0.3 } },
+  };
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    exit: { opacity: 0, y: 10, transition: { duration: 0.2 } },
+  };
+
   return (
     <div className="lg:hidden">
       {/* Кнопка открытия меню */}
       <button
         onClick={() => setMenuOpen(true)}
+        aria-label="Открыть меню"
         className="p-2 focus:outline-none cursor-pointer"
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path fillRule="evenodd" clipRule="evenodd" d="M2.25 5C2.25 4.58579 2.58579 4.25 3 4.25H21C21.4142 4.25 21.75 4.58579 21.75 5C21.75 5.41421 21.4142 5.75 21 5.75H3C2.58579 5.75 2.25 5.41421 2.25 5Z" fill="#535353" />
-          <path fillRule="evenodd" clipRule="evenodd" d="M2.25 12C2.25 11.5858 2.58579 11.25 3 11.25H21C21.4142 11.25 21.75 11.5858 21.75 12C21.75 12.4142 21.4142 12.75 21 12.75H3C2.58579 12.75 2.25 12.4142 2.25 12Z" fill="#535353" />
-          <path fillRule="evenodd" clipRule="evenodd" d="M2.25 19C2.25 18.5858 2.58579 18.25 3 18.25H21C21.4142 18.25 21.75 18.5858 21.75 19C21.75 19.4142 21.4142 19.75 21 19.75H3C2.58579 19.75 2.25 19.4142 2.25 19Z" fill="#535353" />
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <path d="M3 6.5h18" stroke="#2b2b2b" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M3 12h13" stroke="#2b2b2b" strokeWidth="1.6" strokeLinecap="round" />
+          <path d="M3 17.5h18" stroke="#2b2b2b" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
       </button>
 
-      {/* Меню */}
-      <AnimatePresence>
-        {menuOpen && (
-          <>
-            {/* Затемнение фона */}
+      {createPortal(
+        <AnimatePresence>
+          {menuOpen && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.6 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-              className="fixed inset-0 bg-black backdrop-blur-md z-40"
-              onClick={() => setMenuOpen(false)}
-            />
-
-            {/* Главное меню */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="fixed top-0 left-0 right-0 bottom-0 z-50 bg-white flex flex-col justify-center p-6 space-y-8"
+              variants={panelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="fixed inset-0 z-[9999] flex h-[100dvh] flex-col overflow-hidden bg-[#faf7f2]"
             >
-              {/* Кнопка закрытия */}
-              <button
-                onClick={() => setMenuOpen(false)}
-                className="absolute top-6 right-6 cursor-pointer text-4xl font-bold text-gray-700 hover:text-gray-500 transition"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-                  <path fill="#535353" fillRule="evenodd" d="M6.227 6.227a.75.75 0 0 1 1.06 0L12 10.939l4.712-4.712a.75.75 0 1 1 1.061 1.06L13.061 12l4.712 4.712a.75.75 0 0 1-1.06 1.061L12 13.061l-4.712 4.712a.75.75 0 1 1-1.06-1.06L10.938 12 6.227 7.288a.75.75 0 0 1 0-1.061Z" clipRule="evenodd" />
-                </svg>
-              </button>
+            {/* Декоративное свечение */}
+            <div className="pointer-events-none absolute -top-32 -right-24 h-80 w-80 rounded-full bg-[#DFAF68]/25 blur-[90px]" />
+            <div className="pointer-events-none absolute -bottom-40 -left-24 h-80 w-80 rounded-full bg-[#A88856]/15 blur-[100px]" />
 
-              {/* Ссылки */}
-              <div className="flex flex-col space-y-6 text-left text-lg font-semibold">
-                {allLinks.map((link, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
-                    transition={{ delay: 0.1 + i * 0.07, duration: 0.5, ease: "easeOut" }}
+            {/* Шапка */}
+            <div className="relative flex items-center justify-between px-5 pt-5 pb-4">
+              <motion.div variants={fadeUp} initial="hidden" animate="visible">
+                <Link to="/" onClick={close}>
+                  <img className="h-11" src="/logo.svg" alt="Halva Travel" />
+                </Link>
+              </motion.div>
+
+              <motion.button
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                onClick={close}
+                aria-label="Закрыть меню"
+                whileTap={{ scale: 0.9, rotate: 90 }}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-[#A88856]/25 bg-white/70 text-[#2b2b2b] backdrop-blur-sm transition hover:bg-[#A88856] hover:text-white cursor-pointer"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M6 6l12 12M18 6L6 18"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </motion.button>
+            </div>
+
+            {/* Прокручиваемая область */}
+            <div className="relative flex-1 overflow-y-auto overscroll-contain px-5 pb-6">
+              {/* Основные ссылки */}
+              <motion.nav
+                variants={listContainer}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="mt-2 flex flex-col"
+              >
+                {primaryLinks.map((link, i) => (
+                  <Link
+                    key={link.href + i}
+                    to={link.href}
+                    onClick={close}
+                    className="group relative flex items-center justify-between border-b border-black/5 py-3"
                   >
+                    <span className="flex items-baseline gap-3 overflow-hidden">
+                      <motion.span
+                        variants={lineReveal}
+                        className="block text-[11px] font-semibold tabular-nums text-[#A88856]/70"
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </motion.span>
+                      <span className="block overflow-hidden">
+                        <motion.span
+                          variants={lineReveal}
+                          className="block text-[26px] font-bold leading-none tracking-tight text-[#1f1c19] transition-colors duration-300 group-hover:text-[#A88856] group-active:text-[#A88856]"
+                        >
+                          {link.label}
+                        </motion.span>
+                      </span>
+                    </span>
+                    <motion.span
+                      variants={fadeUp}
+                      className="text-[#A88856] opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0"
+                    >
+                      <FiArrowUpRight size={20} />
+                    </motion.span>
+                  </Link>
+                ))}
+              </motion.nav>
+
+              {/* Полезная информация */}
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                transition={{ delay: 0.35 }}
+                className="mt-7"
+              >
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#A88856]">
+                    {t("info")}
+                  </span>
+                  <span className="h-px flex-1 bg-gradient-to-r from-[#A88856]/40 to-transparent" />
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {infoLinks.map((link) => (
                     <Link
+                      key={link.href}
                       to={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className="hover:text-[#DFAF68] transition-colors duration-300"
+                      onClick={close}
+                      className="rounded-full border border-[#A88856]/20 bg-white/60 px-4 py-2 text-sm font-medium text-[#3a352f] backdrop-blur-sm transition active:scale-95 hover:border-[#A88856] hover:bg-[#A88856] hover:text-white"
                     >
                       {link.label}
                     </Link>
-                  </motion.div>
-                ))}
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Нижний блок: контакты, соцсети, язык */}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              transition={{ delay: 0.45 }}
+              className="relative border-t border-black/5 bg-white/50 px-5 py-5 backdrop-blur-sm"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <a
+                  href="tel:+998940072299"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full bg-[#A88856] px-4 py-3 text-sm font-semibold text-white shadow-sm transition active:scale-95 hover:bg-[#96774a]"
+                >
+                  +998 94 007 22 99
+                </a>
+                <a
+                  href="https://wa.me/998940072299"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-white transition active:scale-95 hover:bg-green-600"
+                >
+                  <FaWhatsapp size={18} />
+                </a>
+                <a
+                  href="tg://resolve?phone=998940072299"
+                  aria-label="Telegram"
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-sky-500 text-white transition active:scale-95 hover:bg-sky-600"
+                >
+                  <FaTelegramPlane size={18} />
+                </a>
               </div>
 
-              {/* Смена языка с флажками */}
-              <div className="flex flex-col space-y-4 pt-8 border-t border-gray-200 mt-8 w-full">
-                {langLinks.map((link, i) => (
-                  <motion.button
-                    key={i}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ delay: 0.3 + i * 0.07, duration: 0.5, ease: "easeOut" }}
-                    onClick={() => {
-                      i18n.changeLanguage(link.code);
-                      setMenuOpen(false);
-                    }}
-                    className="flex items-center gap-3 text-gray-600 hover:text-[#DFAF68] transition-colors text-sm"
-                  >
-                    <img src={link.img} alt={link.label} className="w-5 h-5" />
-                    {link.label}
-                  </motion.button>
-                ))}
+              <div className="mt-4 flex items-center gap-2">
+                {langLinks.map((link) => {
+                  const active = i18n.language === link.code;
+                  return (
+                    <button
+                      key={link.code}
+                      onClick={() => {
+                        i18n.changeLanguage(link.code);
+                      }}
+                      className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium transition active:scale-95 ${
+                        active
+                          ? "border-[#A88856] bg-[#A88856] text-white"
+                          : "border-[#A88856]/20 bg-white/70 text-[#3a352f] hover:border-[#A88856]"
+                      }`}
+                    >
+                      <img src={link.img} alt={link.label} className="h-4 w-4 rounded-full object-cover" />
+                      {link.code.toUpperCase()}
+                    </button>
+                  );
+                })}
               </div>
-
             </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+          </motion.div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 };

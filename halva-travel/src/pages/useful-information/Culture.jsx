@@ -33,7 +33,7 @@ const Culture = () => {
         viewport={{ once: true }}
         variants={fadeIn('up', 0.1)}
       >
-        <h1 className="text-4xl font-bold mb-4">{t('culture.title')}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">{t('culture.title')}</h1>
         <p className="text-gray-600 max-w-2xl mx-auto">{t('culture.intro')}</p>
         <motion.img
           src="/handicrafts-in-uzbekistan-culture (1).jpg"
